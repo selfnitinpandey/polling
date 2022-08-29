@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+<!-- block title -->
+{% block title %}
+Dashboard-{{request.user}}
+{% endblock title %}
+
+<!-- block msg -->
+{% block msg %} <br>
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages alert-warning">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><b>{{ message }}</b></li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock msg %}
+
+<!-- content -->
+{% block content %}
+{% for a in addpoll %}
+<div class="row m-2 bg-warning" style='display:inline-block;'>
+    <div class="col">
+        <div class="card" style="width:23rem;">
+            <div class="card-body bg-light">
+                <h5 class="card-title alert alert-primary">@{{a.user}}-:&nbsp;{{a.user.first_name|title}}</h5>
+                <p class="card-text">
+                <ul>
+                    <li><b><i>{{a.question}}</i></b></li>
+                    <ul>
+                        <li>{{a.first_c}}</li>
+                        <li>{{a.second_c}}</li>
+                        <li>{{a.third_c}}</li>
+                        <li>{{a.fourth_c}}</li>
+                    </ul>
+                </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock content %}

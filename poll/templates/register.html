@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+<!-- block title -->
+{% block title %}
+SignUp
+{% endblock title %}
+
+<!-- block msg -->
+{% block msg %} <br>
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages alert-warning">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><b>{{ message }}</b></li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div> 
+
+{% endblock msg %}
+
+<!-- content -->
+{% block content %}
+
+<div class="container p-3">
+
+<form method="POST" novalidate>
+    {% csrf_token %}
+    <div class="bg-light p-3" style="margin:auto; height:500px; width:400px; box-shadow: 7px 3px 1px cyan,-3px -7px 1px red;">
+    <h4 class="alert alert-primary text-center"><i>CreaTe An AccOunT</i></h4>
+
+        {% for f in form %}
+        {{f.errors}}
+        <b>{{f.label}}</b><br>
+        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+        &nbsp;{{f}}<br>
+        {% endfor %}<br>
+    <input class='btn btn-primary w-50' type="submit" Value="Register">
+    <a href="{% url 'login' %}"class="btn btn-info" style="width:170px;">Login</a>
+    </div>
+</form>
+</div>
+{% endblock content %}

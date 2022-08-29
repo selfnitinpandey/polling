@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+<!-- block title -->
+{% block title %}
+Addpoll-{{request.user}}
+{% endblock title %}
+
+<!-- block msg -->
+{% block msg %} <br>
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages alert-warning">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><b>{{ message }}</b></li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div> 
+
+{% endblock msg %}
+
+<!-- content -->
+{% block content %}
+<div class="container bg-light" style="height:450px;width:400px;box-shadow: 7px 3px 1px cyan,-3px -7px 1px red;">
+<h3 class="text-center alert alert-warning p-2"style='text-shadow:3px 4px 2px blue;'><b>Add Question</b></h3>
+<form method="POST">
+    {% csrf_token %}
+    {% for a in addpoll %}
+    <div class="form-group">
+    <label><b>Enter The Question</b></label>
+    <input class='form-control' type="text" value="{{a.question}}" name="question">
+    <label><i>Value Option-1</i></label>
+    <input class='form-control' type="text" value="{{a.first_c}}" name="first_c">
+    <label><i>Value Option-2</i></label>
+    <input class='form-control' type="text"  value="{{a.second_c}}" name="second_c">
+    <label><i>Value Option-3</i></label>
+    <input class='form-control' type="text"  value="{{a.third_c}}" name="third_c">
+    <label><i>Value Option-4</i></label>
+    <input class='form-control' type="text"  value="{{a.fourth_c}}" name="fourth_c"><br>
+    <input class='btn btn-primary' type="submit" value="Uplaod">
+    </div>
+    {% endfor %}
+</form>
+</div><br>
+{% endblock content %}
+

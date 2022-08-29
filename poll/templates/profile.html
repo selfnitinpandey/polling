@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+<!-- block title -->
+{% block title %}
+Profile-{{request.user}}
+{% endblock title %}
+
+<!-- block msg -->
+{% block msg %} <br>
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages alert-warning">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><b>{{ message }}</b></li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock msg %}
+
+
+<!-- content -->
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-3 bg-light" style='box-shadow: 7px 3px 1px cyan,-3px -7px 1px red; height:520px;'>
+            <table class="table table striped w-100 ">
+                <h4 class="alert alert-danger text-center"><i>User Details</i></h4>
+                {% for u in userdetails %}
+                <tr>
+                    <th>USERNAME </th>
+                    <td>@{{u.username}}</td>
+                </tr>
+                <tr>
+                    <th>FIRSTNAME </th>
+                    <td>{{u.first_name}}</td>
+                </tr>
+                <tr>
+                    <th>LASTNAME </th>
+                    <td>{{u.last_name}}</td>
+                </tr>
+                <tr>
+                    <th>EMAIL </th>
+                    <td>{{u.email}}</td>
+
+                </tr>
+                {% endfor %}
+
+            </table>
+            <p align="center" style="font-size:80px;">❤</p>
+
+        </div>
+        <div class="col-sm-8 offset-1" style='box-shadow: 7px 3px 1px cyan,-3px -7px 1px red;'>
+            <h3 class="text-center alert alert-primary"><i>Your Question</i></h3>
+                {% for a in addpoll %}
+                <div class="card" style="width:100%;">
+                    <div class="card-body bg-light">
+                        <a href="/addpoll/{{a.id}}" class="btn btn-info" style="float:right;">Edit</a>
+                        <a href="{% url 'delete' a.id %}" class="btn btn-danger btn-s" style="float:right;">Delete</a>
+                        <p class="card-text">
+                        <ul style="list-style-type:disc">
+                            <li><b><i>{{a.question}}</i></b></li>
+                            <ul class="m-4">
+                                <li>{{a.first_c}}</li>
+                                <li>{{a.second_c}}</li>
+                                <li>{{a.third_c}}</li>
+                                <li>{{a.fourth_c}}</li>
+                            </ul>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    {% endblock content %}

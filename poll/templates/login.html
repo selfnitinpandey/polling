@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+<!-- block title -->
+{% block title %}
+LogIn
+{% endblock title %}
+
+<!-- block msg -->
+{% block msg %} <br>
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages alert-warning">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}><b>{{ message }}</b></li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div> 
+
+{% endblock msg %}
+
+<!-- content -->
+{% block content %}
+
+<div class="container p-5">
+
+<div class=" border bg-light p-4 text-center" style='box-shadow: 7px 3px 1px cyan,-3px -7px 1px red;'>
+    <h4 class="alert alert-primary text-center"><i>LoG In Now</i></h4>
+
+<form method="POST">
+    {% csrf_token %}
+    <b>{{fm.as_p}}</b><br>
+    <input class='btn btn-primary 'type="submit" value="Login">
+    <a href="{% url 'register' %}"class="btn btn-info">Create An Account</a>
+
+</form>
+</div> 
+</div>
+{% endblock content %}
